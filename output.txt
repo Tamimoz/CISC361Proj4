@@ -1,0 +1,78 @@
+Script started on 2019-11-04 14:06:42-0500
+]0;tamimoz@cisc210: ~/xv6-public[01;32mtamimoz@cisc210[00m:[01;34m~/xv6-public[00m$ make qemu
+qemu-system-i386 -serial mon:stdio -drive file=fs.img,index=1,media=disk,format=raw -drive file=xv6.img,index=0,media=disk,format=raw -smp 2 -m 512  -display none
+xv6...
+cpu1: starting 1
+cpu0: starting 0
+process [initcode, 1]
+process [initcode, 1]
+sb: size 1000 nblocks 941 ninodes 200 nlog 30 logstart 2 inodestart 32 bmap start 58
+process [initcode, 1]
+process [initcode, 1]
+process [initcode, 1]
+process [initcode, 1]
+process [initcode, 1]
+process [initcode, 1]
+process [initcode, 1]
+process [initcode, 1]
+process [initcode, 1]
+process [initcode, 1]
+process [initcode, 1]
+process [initcode, 1]
+process [initcode, 1]
+process [initcode, 1]
+process [init, 1]
+init: starting sh
+process [init, 1]
+process [init, 1]
+process [init, 2]
+process [init, 2]
+process [init, 2]
+process [init, 2]
+process [init, 2]
+process [init, 2]
+process [init, 2]
+process [init, 2]
+process [init, 2]
+process [init, 2]
+process [init, 2]
+process [init, 2]
+process [init, 2]
+process [init, 2]
+process [init, 2]
+process [init, 2]
+process [init, 2]
+process [init, 2]
+process [init, 2]
+process [init, 2]
+process [init, 2]
+process [init, 2]
+process [sh, 2]
+process [sh, 2]
+$ ps
+process [sh, 2]
+process [sh, 2]
+process [sh, 3]
+process [sh, 3]
+process [sh, 3]
+process [sh, 3]
+process [sh, 3]
+process [sh, 3]
+process [sh, 3]
+process [sh, 3]
+process [sh, 3]
+process [sh, 3]
+process [sh, 3]
+name     pid     state
+---------------------------
+init     1     SLEEPING
+sh     2     SLEEPING
+ps     3     RUNNING
+process [ps, 3]
+process [sh, 2]
+process [sh, 2]
+$ QEMU: Terminated
+]0;tamimoz@cisc210: ~/xv6-public[01;32mtamimoz@cisc210[00m:[01;34m~/xv6-public[00m$ exit
+exit
+
+Script done on 2019-11-04 14:07:06-0500
