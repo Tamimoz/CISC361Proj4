@@ -88,6 +88,9 @@ allocproc(void)
 found:
   p->state = EMBRYO;
   p->pid = nextpid++;
+  p->numQueue = 3;
+  p->runIter = 8;
+  p->idleIter = 0;
 
   release(&ptable.lock);
 
@@ -336,7 +339,7 @@ scheduler(void)
       if(p->state != RUNNABLE)
         continue;
 
-      cprintf("process [%s, %d]\n", p->name, p->pid);
+      cprintf("process [%s, %d], process queue number: %d, idle count, %d; iterations left: %d\n", p->name, p->pid, p->numQueue, p->runIter, p->idleIter);
       // Switch to chosen process.  It is the process's job
       // to release ptable.lock and then reacquire it
       // before jumping back to us.
