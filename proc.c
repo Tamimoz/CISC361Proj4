@@ -356,6 +356,27 @@ scheduler(void)
   }
 }
 
+void queueChange(struct proc *p, int newQueue){
+  p->numQueue = newQueue;
+  p->idleIter = 0;
+  switch(newQueue){
+    case 3:
+      p->runIter = 8;
+      break;
+    case 2:
+      p->runIter = 16;
+      break;
+    case 1:
+      p->runIter = 24;
+      break;
+    case 0:
+      p->runIter = 500;
+      break;
+    default:
+      cprintf("ERROR: Tried to change to a queue level that is not allowed");
+  }
+}
+
 // Enter scheduler.  Must hold only ptable.lock
 // and have changed proc->state. Saves and restores
 // intena because intena is a property of this
