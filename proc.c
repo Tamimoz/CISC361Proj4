@@ -332,14 +332,18 @@ scheduler(void)
   for(;;){
     // Enable interrupts on this processor.
     sti();
-
+    int maximumQueue = 0;
     // Loop over process table looking for process to run.
     acquire(&ptable.lock);
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
       if(p->state != RUNNABLE)
         continue;
-
-      cprintf("process [%s, %d], process queue number: %d, idle count, %d; iterations left: %d\n", p->name, p->pid, p->numQueue, p->runIter, p->idleIter);
+      if(!canRun(p, maximumQueue == 0)){
+          p->idleIter++;
+      //  continue;
+      }
+      p->runIter--;
+      cprintf("process [%s, %d], process queue number: %d, idle count, %d; iterations left: %d\n", p->name, p->pid, p->numQueue, p->idleIter, p->runIter);
       // Switch to chosen process.  It is the process's job
       // to release ptable.lock and then reacquire it
       // before jumping back to us.
@@ -377,7 +381,15 @@ void queueChange(struct proc *p, int newQueue){
       break;
     default:
       cprintf("ERROR: Tried to change to a queue level that is not allowed");
+      break;
   }
+}
+
+int canRun(struct proc *p,int queueMax){
+  if(p->numQueue < queueMax || p->runIter <= 0){
+    return 0;
+  }
+  return 1;
 }
 
 // Enter scheduler.  Must hold only ptable.lock

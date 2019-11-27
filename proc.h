@@ -62,3 +62,4 @@ struct proc {
 //   expandable heap
 
 void queueChange(struct proc *p, int newQueue);
+int canRun(struct proc *p,int queueMax);
