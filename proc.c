@@ -392,6 +392,27 @@ int canRun(struct proc *p,int queueMax){
   return 1;
 }
 
+void queueCheck(struct proc *p, int *queueMax){
+  if(p->numQueue > *queueMax){
+    *queueMax = p->numQueue;
+  }
+  if(canRun(p, *queueMax)){
+    return;
+  }
+  if(p->runIter <= 0){
+    if(p->numQueue > 0){
+      queueChange(p, p->numQueue -1);
+    }
+    return;
+  }
+  if(p->idleIter > p->runIter){
+    if(p->numQueue < 3){
+      queueChange(p, p->numQueue +1);
+    }
+    return;
+  }
+}
+
 // Enter scheduler.  Must hold only ptable.lock
 // and have changed proc->state. Saves and restores
 // intena because intena is a property of this
