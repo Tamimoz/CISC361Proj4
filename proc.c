@@ -336,11 +336,16 @@ scheduler(void)
     // Loop over process table looking for process to run.
     acquire(&ptable.lock);
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+      for(struct proc *i = ptable.proc; i <&ptable.proc[NPROC];i++){
+        if(i->state == RUNNABLE){
+          queueCheck(i, &maximumQueue);
+        }
+      }
       if(p->state != RUNNABLE)
         continue;
-      if(!canRun(p, maximumQueue == 0)){
+      if(canRun(p, maximumQueue) == 0){
           p->idleIter++;
-      //  continue;
+          continue;
       }
       p->runIter--;
       cprintf("process [%s, %d], process queue number: %d, idle count, %d; iterations left: %d\n", p->name, p->pid, p->numQueue, p->idleIter, p->runIter);
