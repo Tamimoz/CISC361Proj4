@@ -63,3 +63,4 @@ struct proc {
 
 void queueChange(struct proc *p, int newQueue);
 int canRun(struct proc *p,int queueMax);
+void queueCheck(struct proc *p, int *queueMax);
