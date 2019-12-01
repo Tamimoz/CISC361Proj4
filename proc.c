@@ -407,13 +407,17 @@ void queueCheck(struct proc *p, int *queueMax){
   if(p->runIter <= 0){
     if(p->numQueue > 0){
       queueChange(p, p->numQueue -1);
+      return;
     }
+    queueChange(p, 0);
     return;
   }
   if(p->idleIter > p->runIter){
     if(p->numQueue < 3){
       queueChange(p, p->numQueue +1);
+      return;
     }
+    queueChange(p, 3);
     return;
   }
 }
